@@ -1,12 +1,40 @@
 import Link from "next/link";
-
+import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/app/i18n";
 import { Download, Printer } from "lucide-react";
 
+export const generateMetadata = async ({
+  params: { lng },
+}: {
+  params: { lng: string };
+}): Promise<Metadata> => {
+  const { t } = await useTranslation(lng);
+
+  const metadataBase = new URL("https://your-website.com"); // Remplacez par l'URL réelle de votre site
+  const title = t("home_title");
+  const description = t("home_description");
+  const keywords = t("home_keywords");
+
+  return {
+    metadataBase,
+    title,
+    description,
+    keywords,
+    alternates: {
+      canonical: "/",
+      languages: {
+        fr: "/fr",
+        en: "/en",
+        es: "/es",
+        pt: "/pt",
+      },
+    },
+  };
+};
+
 const Home = async ({ params: { lng } }: { params: { lng: string } }) => {
   const { t } = await useTranslation(lng);
-  const currentYear = new Date().getFullYear();
 
   return (
     <main className="">

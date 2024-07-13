@@ -47,10 +47,10 @@ export default async function MonthLinks({
             <Link
               key={month}
               href={getLocalizedUrl(currentYear, normalizedMonth)}
-              className={`p-2 text-center rounded ${
+              className={`p-2 text-center text-white rounded ${
                 month === currentMonth
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "bg-secondary "
+                  : "bg-primary hover:bg-secondary-foreground"
               }`}
             >
               {t(`month.${month}`)}

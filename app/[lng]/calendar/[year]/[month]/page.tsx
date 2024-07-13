@@ -22,6 +22,7 @@ export async function generateMetadata({
       month: t(`month.${normalizedMonth}`),
       year: params.year,
     })}`,
+    keywords: [t("calendar_title")],
   };
 }
 

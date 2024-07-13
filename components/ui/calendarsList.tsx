@@ -59,7 +59,7 @@ export default function CalendarsList({
                   key={`${year}-${obj.normalizedMonth}`}
                   href={getLocalizedUrl(year, obj.normalizedMonth)}
                 >
-                  <a className="p-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                  <a className="p-2 bg-primary text-white rounded hover:bg-secondary">
                     {obj.original}
                   </a>
                 </Link>

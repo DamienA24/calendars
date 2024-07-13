@@ -82,8 +82,8 @@ const CalendarClient: React.FC<{
           {daysToDisplay.map((day: string, index: number) => (
             <div
               key={day}
-              className={`flex justify-center items-center font-bold text-xs sm:text-base p-1 ${
-                index === 6 ? "bg-blue-100" : "bg-red-100"
+              className={`flex justify-center items-center font-bold text-white text-xs sm:text-base p-1 ${
+                index === 6 ? "bg-secondary" : "bg-primary"
               }`}
             >
               <p>{day}</p>
@@ -96,7 +96,7 @@ const CalendarClient: React.FC<{
               <div
                 key={index}
                 className={`h-14 sm:h-24 border text-left p-1 ${
-                  day ? (isSunday ? "bg-blue-100" : "bg-gray-100") : ""
+                  day ? (isSunday ? "bg-secondary" : "bg-gray-100") : ""
                 } flex items-start justify-start`}
               >
                 <span className="text-xs sm:text-sm font-bold">{day}</span>
