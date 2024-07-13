@@ -1,7 +1,6 @@
-import React from "react";
 import { CalendarProps } from "@/types/calendar";
-
 import { useTranslation } from "@/app/i18n";
+import CalendarClient from "./calendarClient";
 
 const Calendar: React.FC<CalendarProps> = async ({
   year,
@@ -10,41 +9,70 @@ const Calendar: React.FC<CalendarProps> = async ({
   month,
 }) => {
   const { t } = await useTranslation(lng);
-  const daysInMonth = new Date(year, monthNumber + 1, 0).getDate();
-  const firstDayOfMonth = new Date(year, monthNumber, 1).getDay();
 
-  const days = [...Array(daysInMonth)].map((_, i) => i + 1);
-  const blanks = [...Array(firstDayOfMonth)].map((_, i) => null);
-
-  const allDays = [...blanks, ...days];
-  const shortDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+  const translations = {
+    month: t(`month.${month}`),
+    print: t("print"),
+    download: t("download"),
+    daysOfWeek: [
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday",
+    ].map((day) => t(`day.${day}`)),
+    daysOfWeekShort: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(
+      (day) => t(`day.${day}`)
+    ),
+    calendar_for: t("calendar_for"),
+    calendar_description: t("calendar_description", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    calendar: t("calendar"),
+    seo_why_use: t("seo_why_use", { month: t(`month.${month}`), year }),
+    seo_easy_planning: t("seo_easy_planning", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_download_easy: t("seo_download_easy", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_various_formats: t("seo_various_formats", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_features: t("seo_features", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_clarity: t("seo_clarity", { month: t(`month.${month}`), year }),
+    seo_elegant_design: t("seo_elegant_design", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_practical: t("seo_practical", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_how_to_use: t("seo_how_to_use", {
+      month: t(`month.${month}`),
+      year,
+    }),
+    seo_other_months: t("seo_other_months", { year }),
+  };
 
   return (
     <div className="bg-white p-4 rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">
-        {t(`month.${month}`)} {year}
-      </h2>
-      <div className="grid grid-cols-7 gap-2">
-        {shortDays.map((day) => (
-          <div key={day} className="text-center font-bold">
-            {t(`day.${day}`)}
-          </div>
-        ))}
-        {allDays.map((day, index) => (
-          <div
-            key={index}
-            className={`text-center p-2 ${day ? "bg-gray-100" : ""} ${
-              day === new Date().getDate() &&
-              monthNumber === new Date().getMonth() &&
-              year === new Date().getFullYear()
-                ? "bg-blue-200"
-                : ""
-            }`}
-          >
-            {day}
-          </div>
-        ))}
-      </div>
+      <CalendarClient
+        year={year}
+        month={month}
+        monthNumber={monthNumber}
+        translations={translations}
+      />
     </div>
   );
 };

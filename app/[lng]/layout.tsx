@@ -3,8 +3,11 @@ import { Inter } from "next/font/google";
 import { dir } from "i18next";
 
 import { languages } from "../i18n/settings";
-import { useTranslation } from "@/app/i18n";
+import NavBar from "@/components/ui/navbar";
+import { cn } from "@/lib/utils";
+
 import "./globals.css";
+import Footer from "@/components/ui/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,11 +31,18 @@ export default function RootLayout({
   children,
   params: { lng },
 }: RootLayoutProps) {
-  useTranslation(lng); // This will set the language for i18next
-
   return (
     <html lang={lng} dir={dir(lng)}>
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen flex flex-col justify-between",
+          inter.className
+        )}
+      >
+        <NavBar lng={lng} />
+        {children}
+        <Footer lng={lng} />
+      </body>
     </html>
   );
 }

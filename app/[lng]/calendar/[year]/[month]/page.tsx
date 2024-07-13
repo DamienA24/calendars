@@ -14,8 +14,14 @@ export async function generateMetadata({
   const normalizedMonth = normalizeString(decodedMonth.toLowerCase());
 
   return {
-    title: `${t("calendars")} ${normalizedMonth} ${params.year}`,
-    description: `${t("calendar_for")} ${normalizedMonth} ${params.year}`,
+    title: `${t("seo_title", {
+      month: t(`month.${normalizedMonth}`),
+      year: params.year,
+    })}`,
+    description: `${t("seo_description", {
+      month: t(`month.${normalizedMonth}`),
+      year: params.year,
+    })}`,
   };
 }
 
@@ -28,8 +34,15 @@ export default async function CalendarPage({ params }: CalendarPageProps) {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">
-        {t("calendars")} {t(`month.${month}`)} {params.year}
+        {t("calendar_for")} {t(`month.${month}`)} {params.year}
       </h1>
+      <p className="mb-4">
+        {t("seo_description", {
+          month: t(`month.${normalizedMonth}`),
+          year,
+        })}
+      </p>
+
       <Calendar
         year={parseInt(year)}
         month={month}
@@ -37,6 +50,40 @@ export default async function CalendarPage({ params }: CalendarPageProps) {
         lng={lng}
       />
       <MonthLinks currentYear={year} currentMonth={normalizedMonth} lng={lng} />
+      <h2 className="text-2xl font-bold mt-8 mb-2">
+        {t("seo_why_use", { month: t(`month.${normalizedMonth}`), year })}
+      </h2>
+      <ul className="mb-4">
+        <li>
+          {t("seo_easy_planning", {
+            month: t(`month.${normalizedMonth}`),
+            year,
+          })}
+        </li>
+        <li>
+          {t("seo_download_easy", {
+            month: t(`month.${normalizedMonth}`),
+            year,
+          })}
+        </li>
+      </ul>
+      <h2 className="text-2xl font-bold mb-2">
+        {t("seo_features", { month: t(`month.${normalizedMonth}`), year })}
+      </h2>
+      <ul className="mb-4">
+        <li>
+          {t("seo_clarity", { month: t(`month.${normalizedMonth}`), year })}
+        </li>
+        <li>
+          {t("seo_elegant_design", {
+            month: t(`month.${normalizedMonth}`),
+            year,
+          })}
+        </li>
+        <li>
+          {t("seo_practical", { month: t(`month.${normalizedMonth}`), year })}
+        </li>
+      </ul>
     </div>
   );
 }

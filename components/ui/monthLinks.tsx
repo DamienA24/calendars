@@ -17,17 +17,16 @@ export default async function MonthLinks({
   const { t } = await useTranslation(lng);
 
   const getLocalizedUrl = (year: string, month: string) => {
-    console.log("month: ", month);
     switch (lng) {
       case "en":
-        return `/calendar-${year}-${month}`;
+        return `/en/calendar-${year}-${month}`;
       case "es":
-        return `/calendario-${month}-${year}`;
+        return `/es/calendario-${month}-${year}`;
       case "pt":
-        return `/calendario-${month}-${year}`;
+        return `/pt/calendario-${month}-${year}`;
       case "fr":
       default:
-        return `/calendrier-${month}-${year}`;
+        return `/fr/calendrier-${month}-${year}`;
     }
   };
   const translateMonth = (month: string) => {
@@ -37,7 +36,9 @@ export default async function MonthLinks({
   };
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Autres mois de {currentYear}</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        {t("other_months")} {currentYear}
+      </h2>
       <div className="grid grid-cols-4 gap-2">
         {monthNames.map((month) => {
           const normalizedMonth = translateMonth(month);
