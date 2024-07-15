@@ -88,6 +88,8 @@ const getCalendarPaths = () => {
         paths.push({
           url: `${baseUrl}${url}`,
           lastModified: new Date().toISOString(),
+          changeFrequency: "daily",
+          priority: 1,
         });
       }
     }
@@ -99,7 +101,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const calendarPaths = getCalendarPaths();
 
   const staticPaths = [
-    { url: `${baseUrl}/en`, lastModified: new Date().toISOString() },
+    {
+      url: `${baseUrl}/en`,
+      lastModified: new Date().toISOString(),
+    },
     { url: `${baseUrl}/fr`, lastModified: new Date().toISOString() },
     { url: `${baseUrl}/es`, lastModified: new Date().toISOString() },
     { url: `${baseUrl}/pt`, lastModified: new Date().toISOString() },
