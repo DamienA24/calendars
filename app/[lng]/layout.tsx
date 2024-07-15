@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import Footer from "@/components/ui/footer";
 
-import { useTranslation } from "@/app/i18n";
+import { useTranslation, translationManually } from "@/app/i18n";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export const generateMetadata = async ({
 }: {
   params: { lng: string };
 }): Promise<Metadata> => {
-  const { t } = await useTranslation(lng);
+  const { t } = await translationManually(lng);
 
   const metadataBase = new URL("https://www.calendohub.com"); // Remplacez par l'URL réelle de votre site
   const title = t("calendars_titles");

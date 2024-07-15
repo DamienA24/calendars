@@ -1,15 +1,26 @@
-import { Metadata, GetStaticProps, GetStaticPaths } from "next";
+import { Metadata } from "next";
 
 import { getMonthNumber, normalizeString } from "@/lib/utils";
 import { CalendarPageProps } from "@/types/calendar";
 import MonthLinks from "@/components/ui/monthLinks";
 import Calendar from "@/components/ui/calendar";
-import { useTranslation } from "@/app/i18n";
+import { useTranslation, translationManually } from "@/app/i18n";
 
+interface Path {
+  params: {
+    locale: string;
+    year: string;
+    month: string;
+  };
+}
+
+interface Months {
+  [key: string]: string[];
+}
 export async function generateMetadata({
   params,
 }: CalendarPageProps): Promise<Metadata> {
-  const { t } = await useTranslation(params.lng);
+  const { t } = await translationManually(params.lng);
   const decodedMonth = decodeURIComponent(params.month);
   const normalizedMonth = normalizeString(decodedMonth.toLowerCase());
 
@@ -25,17 +36,7 @@ export async function generateMetadata({
     keywords: [t("calendar_title")],
   };
 }
-interface Path {
-  params: {
-    locale: string;
-    year: string;
-    month: string;
-  };
-}
 
-interface Months {
-  [key: string]: string[];
-}
 export const generateStaticParams = async () => {
   const paths: Array<Path> = [];
   const locales = ["fr", "en", "es", "pt"];
@@ -118,6 +119,7 @@ export default async function CalendarPage({ params }: CalendarPageProps) {
   const decodedMonth = decodeURIComponent(month);
   const normalizedMonth = normalizeString(decodedMonth.toLowerCase());
   const monthNumber = getMonthNumber(normalizedMonth);
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">

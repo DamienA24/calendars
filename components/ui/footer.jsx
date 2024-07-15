@@ -18,7 +18,7 @@ export default async function Footer({ lng }) {
         </Link>
 
         <div className="flex flex-col mb-5 sm:mb-0">
-          <Link href="#" prefetch={false}>
+          <Link href="https://www.calendohub.com/sitemap.xml" prefetch={false}>
             Sitemap
           </Link>
         </div>

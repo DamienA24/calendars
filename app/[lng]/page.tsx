@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
-import { useTranslation } from "@/app/i18n";
+import { useTranslation, translationManually } from "@/app/i18n";
 import { Download, Printer } from "lucide-react";
 
 export const generateMetadata = async ({
@@ -9,7 +9,7 @@ export const generateMetadata = async ({
 }: {
   params: { lng: string };
 }): Promise<Metadata> => {
-  const { t } = await useTranslation(lng);
+  const { t } = await translationManually(lng);
 
   const metadataBase = new URL("https://www.calendohub.com"); // Remplacez par l'URL réelle de votre site
   const title = t("home_title");
