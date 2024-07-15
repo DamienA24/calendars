@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { Metadata, GetStaticProps, GetStaticPaths } from "next";
 
 import { getMonthNumber, normalizeString } from "@/lib/utils";
 import { CalendarPageProps } from "@/types/calendar";
@@ -25,6 +25,92 @@ export async function generateMetadata({
     keywords: [t("calendar_title")],
   };
 }
+interface Path {
+  params: {
+    locale: string;
+    year: string;
+    month: string;
+  };
+}
+
+interface Months {
+  [key: string]: string[];
+}
+export const generateStaticParams = async () => {
+  const paths: Array<Path> = [];
+  const locales = ["fr", "en", "es", "pt"];
+  const years = Array.from({ length: 2050 - 1900 + 1 }, (_, i) => 1900 + i);
+  const months: Months = {
+    en: [
+      "january",
+      "february",
+      "march",
+      "april",
+      "may",
+      "june",
+      "july",
+      "august",
+      "september",
+      "october",
+      "november",
+      "december",
+    ],
+    fr: [
+      "janvier",
+      "fevrier",
+      "mars",
+      "avril",
+      "mai",
+      "juin",
+      "juillet",
+      "aout",
+      "septembre",
+      "octobre",
+      "novembre",
+      "decembre",
+    ],
+    es: [
+      "enero",
+      "febrero",
+      "marzo",
+      "abril",
+      "mayo",
+      "junio",
+      "julio",
+      "agosto",
+      "septiembre",
+      "octubre",
+      "noviembre",
+      "diciembre",
+    ],
+    pt: [
+      "janeiro",
+      "fevereiro",
+      "marco",
+      "abril",
+      "maio",
+      "junho",
+      "julho",
+      "agosto",
+      "setembro",
+      "outubro",
+      "novembro",
+      "dezembro",
+    ],
+  };
+
+  locales.forEach((locale: string) => {
+    years.forEach((year) => {
+      months[locale].forEach((month: string) => {
+        paths.push({
+          params: { locale, year: year.toString(), month },
+        });
+      });
+    });
+  });
+
+  return paths;
+};
 
 export default async function CalendarPage({ params }: CalendarPageProps) {
   const { year, month, lng } = params;

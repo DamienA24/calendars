@@ -11,7 +11,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const { t } = await useTranslation(lng);
 
-  const metadataBase = new URL("https://your-website.com"); // Remplacez par l'URL réelle de votre site
+  const metadataBase = new URL("https://www.calendohub.com"); // Remplacez par l'URL réelle de votre site
   const title = t("home_title");
   const description = t("home_description");
   const keywords = t("home_keywords");
@@ -43,7 +43,7 @@ const Home = async ({ params: { lng } }: { params: { lng: string } }) => {
           <h1 className="text-4xl text-center font-bold tracking-tight sm:text-5xl md:text-6xl">
             {t("presentation")}
           </h1>
-          <Link href={`${lng}/calendars`}>
+          <Link href={`${lng}/${t("calendars_link")}`}>
             <Button className="mt-8 text-xl" size={"lg"}>
               {t("your_calendar")}
             </Button>

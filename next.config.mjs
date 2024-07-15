@@ -108,40 +108,69 @@ const nextConfig = {
       },
     };
 
-    for (let year = 2023; year <= 2025; year++) {
-      for (const locale of locales) {
-        for (const month of months[locale]) {
-          let source;
-          let normalizedMonth;
-          switch (locale) {
-            case "en":
-              source = `/${locale}/calendar-${year}-${month}`;
-              normalizedMonth = month;
-              break;
-            case "es":
-              source = `/${locale}/calendario-${month}-${year}`;
-              normalizedMonth = monthMapping[locale][month];
-              break;
-            case "pt":
-              source = `/${locale}/calendario-${month}-${year}`;
-              normalizedMonth = monthMapping[locale][month];
-              break;
-            case "fr":
-            default:
-              source = `/${locale}/calendrier-${month}-${year}`;
-              normalizedMonth = monthMapping[locale][month];
-              break;
-          }
-          rewrites.push({
-            source,
-            destination: `/${locale}/calendar/${year}/${normalizedMonth}`,
-            locale: false,
-          });
+    for (const locale of locales) {
+      for (const month of months[locale]) {
+        let source;
+        let normalizedMonth;
+        switch (locale) {
+          case "en":
+            source = `/${locale}/calendar-:year(\\d{4})-${month}`;
+            normalizedMonth = month;
+            break;
+          case "es":
+            source = `/${locale}/calendario-${month}-:year(\\d{4})`;
+            normalizedMonth = monthMapping[locale][month];
+            break;
+          case "pt":
+            source = `/${locale}/calendario-${month}-:year(\\d{4})`;
+            normalizedMonth = monthMapping[locale][month];
+            break;
+          case "fr":
+          default:
+            source = `/${locale}/calendrier-${month}-:year(\\d{4})`;
+            normalizedMonth = monthMapping[locale][month];
+            break;
         }
+        rewrites.push({
+          source,
+          destination: `/${locale}/calendar/:year/${normalizedMonth}`,
+          locale: false,
+        });
       }
+      let source;
+      switch (locale) {
+        case "en":
+          source = `/${locale}/calendars`;
+          break;
+        case "es":
+        case "pt":
+          source = `/${locale}/calendarios`;
+          break;
+        case "fr":
+        default:
+          source = `/${locale}/calendriers`;
+          break;
+      }
+      rewrites.push({
+        source,
+        destination: `/${locale}/calendars/`,
+        locale: false,
+      });
     }
     return rewrites;
   },
 };
+
+/* const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: "/:lng/(calendar|calendario|calendrier)-:year(\\d{4})-:month",
+        destination: "/:lng/calendar/:year/:month",
+        locale: false,
+      },
+    ];
+  },
+}; */
 
 export default nextConfig;

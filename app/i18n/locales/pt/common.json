@@ -6,6 +6,7 @@
   "calendars_description": "Explore nossa coleção de calendários organizados por ano e mês. Baixe e imprima seus calendários para planejar seus eventos facilmente.",
   "calendars_keywords": "calendários, imprimir calendários, baixar calendários",
   "calendars": "Calendários",
+  "calendars_link":"calendarios",
   "calendar_for": "Calendário para",
   "calendar_description": "Confira o calendário para {{month}} {{year}} com todas as datas importantes e eventos.",
   "your_calendar": "Seus calendários",

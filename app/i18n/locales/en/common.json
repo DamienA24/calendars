@@ -6,6 +6,7 @@
   "calendars_description": "Explore our collection of calendars organized by year and month. Download and print your calendars to easily plan your events.",
   "calendars_keywords": "calendars, print calendars, download calendars",
   "calendars": "Calendars",
+  "calendars_link": "calendars",
   "calendar_for": "Calendar for",
   "calendar_description": "Check out the calendar for {{month}} {{year}} with all important dates and events.",
   "your_calendar": "Your calendars",

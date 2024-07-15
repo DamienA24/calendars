@@ -20,7 +20,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const { t } = await useTranslation(lng);
 
-  const metadataBase = new URL("https://your-website.com"); // Remplacez par l'URL réelle de votre site
+  const metadataBase = new URL("https://www.calendohub.com"); // Remplacez par l'URL réelle de votre site
   const title = t("calendars_titles");
   const description = t("home_description");
   const keywords = t("home_keywords");
