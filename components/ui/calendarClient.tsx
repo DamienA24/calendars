@@ -12,6 +12,11 @@ const CalendarClient: React.FC<{
   translations: any;
 }> = ({ year, month, monthNumber, translations }) => {
   const [documentType, setDocumentType] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const daysInMonth = new Date(year, monthNumber + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, monthNumber, 1).getDay();
@@ -23,7 +28,8 @@ const CalendarClient: React.FC<{
 
   const allDays = [...blanks, ...days];
   const { print, download, daysOfWeek, daysOfWeekShort } = translations;
-  const daysToDisplay = window.innerWidth <= 768 ? daysOfWeekShort : daysOfWeek;
+  const daysToDisplay =
+    isClient && window.innerWidth <= 768 ? daysOfWeekShort : daysOfWeek;
   const calendarRef = useRef<HTMLDivElement>(null);
   const { toPDF, targetRef } = usePDF({
     method: "save",
