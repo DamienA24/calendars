@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { dir } from "i18next";
 
 import { languages } from "../i18n/settings";
@@ -55,6 +56,12 @@ export default function RootLayout({
           inter.className
         )}
       >
+        {process.env.NODE_ENV === "production" && (
+          <Script
+            src="https://cloud.umami.is/script.js"
+            data-website-id="196c8163-a52a-4546-aece-eacb5ee112dd"
+          />
+        )}
         <NavBar lng={lng} />
         {children}
         <Footer lng={lng} />
